@@ -1,4 +1,4 @@
-from services.scrappy import scrapped_data_cleaner
+from app.services.scrappy import scrapped_data_cleaner
 
 RAW_WHOIS_DATA = [
     'bcit.ca',
