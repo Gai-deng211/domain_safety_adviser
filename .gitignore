@@ -7,10 +7,10 @@ __pycache__/
 *.pyd
 
 # Virtual environments
-dsa_26/
+.venv/
 venv/
 .env/
-.venv/
+dsa_26/
 
 # =========================
 # Environment files
@@ -61,3 +61,10 @@ Thumbs.db
 # Alembic (optional: keep versions, ignore runtime artifacts)
 # =========================
 alembic/__pycache__/
+
+# =========================
+# Project structure specific
+# =========================
+app/__pycache__/
+app/services/__pycache__/
+app/tests/__pycache__/
