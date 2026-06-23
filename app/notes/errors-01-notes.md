@@ -12,6 +12,7 @@ Set up GitHub Actions continuous integration to automate testing on pushes and p
 
 ## Issues Encountered
 
+- `.github/workflows/ci.yml` location error. It was nested inside `app/`
 - `requirements.txt` missing from root directory (was located in `app/`)
 - Import error: `No module named 'services'` due to improper import paths and project structure
 - Minor test failure from mismatch in `status` value formatting
@@ -20,6 +21,7 @@ Set up GitHub Actions continuous integration to automate testing on pushes and p
 
 ## Solutions Applied
 
+- Moved `.github/workflows/ci.yml` to the root repo location
 - Moved `requirements.txt` to repository root for CI visibility
 - Updated scraper logic to standardize/normalize `status` field values
 - Adjusted test discovery to work from repo root
