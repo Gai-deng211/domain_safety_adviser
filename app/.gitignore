@@ -1,0 +1,63 @@
+# =========================
+# Python
+# =========================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual environments
+dsa_26/
+venv/
+.env/
+.venv/
+
+# =========================
+# Environment files
+# =========================
+.env
+.env.local
+.env.*.local
+
+# =========================
+# Testing
+# =========================
+.pytest_cache/
+.coverage
+htmlcov/
+
+# =========================
+# IDE / Editor
+# =========================
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# =========================
+# OS files
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# Logs
+# =========================
+*.log
+
+# =========================
+# Playwright / browser cache
+# =========================
+.playwright/
+.cache/
+
+# =========================
+# Database (if added later)
+# =========================
+*.db
+*.sqlite3
+
+# =========================
+# Alembic (optional: keep versions, ignore runtime artifacts)
+# =========================
+alembic/__pycache__/
