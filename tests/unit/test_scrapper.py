@@ -1,4 +1,7 @@
-from app.services.scrappy import scrapped_data_cleaner
+from decimal import ConversionSyntax
+from app.services import scrapped_data_cleaner
+from app.schemas import RegistrationData, change_data_to_model
+from datetime import datetime
 
 RAW_WHOIS_DATA = [
     'bcit.ca',
@@ -71,3 +74,8 @@ def test_scrapped_data_cleaner_returns_dict():
     assert len(cleaned) == 6
     assert cleaned["domain"] == "bcit.ca"
     assert cleaned["expires_on"] == "2027-04-19"
+
+def test_changed_data_to_model():
+    converted = change_data_to_model(EXPECTED_VERSION)
+    assert isinstance(converted, RegistrationData)
+    assert converted.expires_on > datetime.now().date()

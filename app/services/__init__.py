@@ -1,0 +1,1 @@
+from .scrappy import scrapped_data_cleaner
