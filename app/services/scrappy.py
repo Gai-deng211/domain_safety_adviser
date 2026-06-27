@@ -77,7 +77,6 @@ def end_state_data(url: str | None = None) -> dict[str, str | list[str]] | None:
 
 if __name__ == '__main__':
     data = whois_web_scrapper("bcit.ca")
-    print("\n\n")
     print(data)
     print("\n\n")
     # result = scrapped_data_cleaner(data)
