@@ -20,7 +20,7 @@ jobs:
         run: |
           pip install --upgrade pip
           pip install -r requirements.txt
-      - name: Install Playwright binaries - Browsers
-        run: playwright install
+      - name: Install Playwright binaries - Google Chrome
+        run: playwright install chromium
       - name: Run tests
         run: pytest -v
