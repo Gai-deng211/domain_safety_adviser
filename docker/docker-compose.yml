@@ -1,0 +1,27 @@
+version: "3.9"
+
+services:
+  # 1. Postgresql database container
+  psql_db:
+    # Details of the db
+    image: postgres:16
+    container_name: postgresql_container
+    restart: always
+
+    env_file:
+      .env
+    # db security
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - "${DB_PORT}:5432"
+    # Persisting the data / permanent storage on hard-drive
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
+
+    

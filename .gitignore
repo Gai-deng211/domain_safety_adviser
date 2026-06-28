@@ -18,6 +18,7 @@ dsa_26/
 .env
 .env.local
 .env.*.local
+docker/.env
 
 # =========================
 # Testing

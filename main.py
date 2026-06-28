@@ -1,5 +1,6 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Depends
 from app.api import router
+from app.database.session import get_db
 
 app = FastAPI()
 
@@ -10,3 +11,7 @@ def home():
     return {
         "message": "main application is running ✅🚀🚀🚀"
     }
+
+@app.get("/health")
+def health(db=Depends(get_db)):
+    return {"status": "db connected 🚀🚀✅✅"}
