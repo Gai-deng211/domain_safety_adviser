@@ -3,11 +3,10 @@ name: CI - continuous integration workflows
 on:
   push:
     branches:
-      - main
       - dev
   pull_request:
     branches:
-      - dev
+      - main
 
 jobs:
   check:
