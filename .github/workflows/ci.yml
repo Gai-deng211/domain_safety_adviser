@@ -1,11 +1,14 @@
 name: CI - continuous integration workflows
+
 on:
   push:
     branches:
-      [main, dev]
+      - main
+      - dev
   pull_request:
     branches:
       - dev
+
 jobs:
   check:
     runs-on: ubuntu-latest
@@ -14,32 +17,49 @@ jobs:
       postgres:
         image: postgres:16
         env:
-          POSTGRES_USER: ${{ secrets.POSTGRES_USER}}
-          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD}}
-          POSTGRES_DB: ${{ secrets.POSTGRES_DB}}
+          POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+          POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
         ports:
           - 5432:5432
         options: >-
-          --health-cmd="pg_isready -U scrapper"
+          --health-cmd="pg_isready -U ${{ secrets.POSTGRES_USER }}"
           --health-interval=10s
           --health-timeout=5s
           --health-retries=5
+
     env:
-     DATABASE_URL: postgresql+psycopg2://${{ secrets.POSTGRES_USER }}:${{ secrets.POSTGRES_PASSWORD }}@localhost:5432/${{ secrets.POSTGRES_DB }}
- 
+      DATABASE_URL: postgresql+psycopg2://${{ secrets.POSTGRES_USER }}:${{ secrets.POSTGRES_PASSWORD }}@localhost:5432/${{ secrets.POSTGRES_DB }}
+
     steps:
       - uses: actions/checkout@v3
+
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: 3.12
+          python-version: "3.12"
+
       - name: Install dependencies
         run: |
-          pip install --upgrade pip
+          python -m pip install --upgrade pip
           pip install -r requirements.txt
-      - name: Install Playwright binaries - Google Chrome
-        run: playwright install chromium
+
+      - name: Install Playwright binaries - Chromium
+        run: python -m playwright install chromium
+
+      - name: Wait for Postgres to be ready
+        run: |
+          for i in {1..20}; do
+            if pg_isready -h localhost -U "${{ secrets.POSTGRES_USER }}" -d "${{ secrets.POSTGRES_DB }}"; then
+              echo "Postgres is ready"
+              break
+            fi
+            echo "Waiting for Postgres..."
+            sleep 3
+          done
+
       - name: Run Alembic migrations
         run: alembic upgrade head
+
       - name: Run tests
         run: pytest -v
