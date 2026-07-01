@@ -57,7 +57,6 @@ docker compose build      # Build (or rebuild) images
 ```
 
 ---
-
 ## Summary
 
 - **Dockerfile**: Defines how your app image is built.
